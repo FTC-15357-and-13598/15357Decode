@@ -66,7 +66,7 @@ public class intakeShooter {
             myMotor.setPower(0.0);
         }
     }
-    
+
     public void servoRecieve (){
         myServo.setPosition(Constants.Bucket.recievePosition);
         myOpMode.telemetry.addData("Servo Position",Constants.Bucket.recievePosition);
@@ -76,4 +76,6 @@ public class intakeShooter {
         step=1;
     }
 
+    public void toDown() {
+    }
 }
