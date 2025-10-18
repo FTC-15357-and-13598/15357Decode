@@ -208,7 +208,7 @@ public class DriveMotorTest extends LinearOpMode {
             if (gamepad1.dpad_left){rightFrontDrive.setPower(1.0);}
             if (gamepad1.dpad_right){rightBackDrive.setPower(1.0);}
 
-            if (gamepad1.y){shooterMotor1.setPower(0.6);}
+            if (gamepad1.y){shooterMotor1.setPower(0.7);}
             else {shooterMotor1.setPower(0);}
 
             if (gamepad1.b){intakeMotor.setPower(1.0);}
