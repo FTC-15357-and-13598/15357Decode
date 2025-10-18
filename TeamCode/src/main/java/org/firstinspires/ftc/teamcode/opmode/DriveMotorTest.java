@@ -77,6 +77,7 @@ public class DriveMotorTest extends LinearOpMode {
 
     private IMU imu = null;
 
+
     @Override
     public void runOpMode() {
 
@@ -100,7 +101,6 @@ public class DriveMotorTest extends LinearOpMode {
         //// Set up our telemetry dashboard
         FtcDashboard dashboard = FtcDashboard.getInstance();
         TelemetryPacket packet = new TelemetryPacket();
-
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
         // ########################################################################################
@@ -135,6 +135,7 @@ public class DriveMotorTest extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
+         boolean isShooting=false;
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
@@ -202,19 +203,29 @@ public class DriveMotorTest extends LinearOpMode {
            double shooterVelocity = shooterMotor1.getVelocity();
             telemetry.addData("velocity", shooterVelocity);
 
-
             if (gamepad1.dpad_up){leftFrontDrive.setPower(1.0);}
             if (gamepad1.dpad_down){leftBackDrive.setPower(1.0);}
             if (gamepad1.dpad_left){rightFrontDrive.setPower(1.0);}
             if (gamepad1.dpad_right){rightBackDrive.setPower(1.0);}
 
-            if (gamepad1.y){shooterMotor1.setPower(0.7);}
+            if (gamepad1.y){
+                shooterMotor1.setPower(0.75);
+                if (shooterVelocity>1600){isShooting=true;
+                    intakeServo.setPosition(0);
+
+                }
+                else {intakeServo.setPosition(0.5);
+                    isShooting=false;}
+
+            }//was .7
+            else if (gamepad1.x){shooterMotor1.setPower(-0.3);}
             else {shooterMotor1.setPower(0);}
+
 
             if (gamepad1.b){intakeMotor.setPower(1.0);}
             else {intakeMotor.setPower(0);}
-            if (gamepad1.a) intakeServo.setPosition(0);
-            else intakeServo.setPosition(0.5);
+            if (gamepad1.a) {intakeServo.setPosition(0);}
+            else if (isShooting==false){intakeServo.setPosition(0.5);}
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);

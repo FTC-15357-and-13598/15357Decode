@@ -71,6 +71,7 @@ public class intakeShooter {
         myServo.setPosition(Constants.Bucket.recievePosition);
         myOpMode.telemetry.addData("Servo Position",Constants.Bucket.recievePosition);
     }
+
     public int step=0;
     public void scoreBucket() {
         step=1;
