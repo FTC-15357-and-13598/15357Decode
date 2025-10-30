@@ -15,7 +15,7 @@ public class Constants {
         public static final String MOTOR_LF = "leftFrontDrive";
         public static final DcMotorSimple.Direction LF_Direction =DcMotorSimple.Direction.FORWARD;
         public static final String MOTOR_LB = "leftBackDrive";
-        public static final DcMotorSimple.Direction LB_Direction =DcMotorSimple.Direction.FORWARD;
+        public static final DcMotorSimple.Direction LB_Direction =DcMotorSimple.Direction.REVERSE;
         public static final String MOTOR_RF = "rightFrontDrive";
         public static final DcMotorSimple.Direction RF_Direction =DcMotorSimple.Direction.FORWARD;
         public static final String MOTOR_RB = "rightBackDrive";
@@ -26,7 +26,7 @@ public class Constants {
         public static final String IMU = "imu";
         public static final RevHubOrientationOnRobot.LogoFacingDirection HUB_LOGO_WALL = RevHubOrientationOnRobot.LogoFacingDirection.LEFT;
         public static final RevHubOrientationOnRobot.LogoFacingDirection HUB_LOGO_AWAY = RevHubOrientationOnRobot.LogoFacingDirection.RIGHT;
-        public static final RevHubOrientationOnRobot.UsbFacingDirection HUB_USB = RevHubOrientationOnRobot.UsbFacingDirection.DOWN;
+        public static final RevHubOrientationOnRobot.UsbFacingDirection HUB_USB = RevHubOrientationOnRobot.UsbFacingDirection.UP;
 
         // Position Tuning constants
         // TODO Tune gains and accels for robot. Currnently moves in an odd rhomboid way.
@@ -61,32 +61,7 @@ public class Constants {
         public static final SparkFunOTOS.Pose2D Bucket = new SparkFunOTOS.Pose2D(8.5,110.0,0.0); // Starting position for blue bucket position
 
     }
-    public static final class Specimen {
-        // Drivetrain Motors, Define configured name and direction
-        public static final String MOTOR = "viperLeft";
-        public static final DcMotorSimple.Direction Direction =DcMotorSimple.Direction.REVERSE;
-
-        public static final double defaultPower         =0.95;
-        public static final int tolerance               =2;
-
-        //598 public static final int DownPosition            = 400;
-       //598  public static final int LowBarPosition          = 12213;
-        //598 Code public static final int HighBarPosition         = 15325;
-
-        //public static final int DownPosition = 10;
-        //public static final int LowBarPosition = 400;
-        //public static final int HighBarPosition = 1004;
-
-        public static final int DownPosition = 100;
-        public static final int LowBarPosition = 2012;
-        public static final int HighBarPosition = 13000;
-        public static final int ClimbBarPosition = 15740;
-
-
-
-        public static final int HookMove                = 5000;
-    }
-    public static final class Bucket {
+    public static final class IntakeShooter {
         // Drivetrain Motors, Define configured name and direction
         public static final String MOTOR = "viperRight";
         public static final DcMotorSimple.Direction Direction =DcMotorSimple.Direction.REVERSE;
@@ -103,35 +78,6 @@ public class Constants {
         public static final double recievePosition      = 0.35;
         public static final double dumpPosition         = 0.47;
         public static final double raisePosition         = 0.38;
-    }
-
-    public static final class INTAKE {
-        // Drivetrain Motors, Define configured name and direction
-        public static final String MOTOR = "intakeMotor";
-        public static final DcMotorSimple.Direction Direction =DcMotorSimple.Direction.REVERSE;
-
-        public static final double defaultPower         =0.9;
-        public static final int tolerance               =2;
-
-        public static final int intakePosition            = 5;
-        public static final int unLoadPosition       = 413;
-        public static final int travelPosition      = 1504;
-
-        public static final String intakeServo = "intakeServo";
-
-        public static final String slideServo                ="intakeSlideServo";
-        public static final double forwardPosition      = 0.1;
-        public static final double backPosition         = 0.5;
-
-        public static final String doorServo            ="intakeDoor";
-        public static final double doorOpenPosition         =0.5;
-        public static final double doorClosePosition        =0.0;
-
-        public static final String armRotationServo          ="armRotationServo";
-        public static final double armDownPosition       =0.9;
-        public static final double armMidPosition        =0.6;
-        public static final double armUpPosition         =0.1;
-
     }
 
     public static final class Telemetry {

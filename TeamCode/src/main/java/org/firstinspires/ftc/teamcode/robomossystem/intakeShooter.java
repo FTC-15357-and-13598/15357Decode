@@ -17,7 +17,7 @@ public class intakeShooter {
     }
 
     // Declare motor with encoder and servo
-    private static DcMotor myMotor = null;
+    private static DcMotor intakeMotor = null;
     private static Servo myServo = null;
 
     // Define a constructor that allows the OpMode to pass a reference
@@ -31,15 +31,15 @@ public class intakeShooter {
      **/
     public void init() {
         // Define and Initialize Motors and servos (note: need to use reference to actual OpMode).
-        myMotor = myOpMode.hardwareMap.get(DcMotor.class, Constants.Bucket.MOTOR);
-        myServo = myOpMode.hardwareMap.get(Servo.class, Constants.Bucket.Servo);
-        myServo.setPosition(Constants.Bucket.recievePosition);
+        intakeMotor = myOpMode.hardwareMap.get(DcMotor.class, Constants.IntakeShooter.MOTOR);
+        myServo = myOpMode.hardwareMap.get(Servo.class, Constants.IntakeShooter.Servo);
+        myServo.setPosition(Constants.IntakeShooter.recievePosition);
 
         // Set the drive motor directions:
         // "Reverse" the motor that runs backwards when connected directly to the battery
         // Set to FORWARD if using AndyMark motors
-        myMotor.setDirection(Constants.Bucket.Direction);
-        myMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        intakeMotor.setDirection(Constants.IntakeShooter.Direction);
+        intakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
         // Set the drive motor modes to run with and 0 encoder
 
@@ -55,21 +55,22 @@ public class intakeShooter {
     public String bucketPosition = null;
 
     public void periodic(){
-        position =myMotor.getCurrentPosition(); // For adding to dashboard
-        target= myMotor.getTargetPosition();    // For adding to dashboard
-        power= myMotor.getPower();              // For adding to dashboard
-        AtTarget = (Math.abs(position-target)<Constants.Bucket.tolerance);  // For adding to dashboard
+     //   position =myMotor.getCurrentPosition(); // For adding to dashboard
+     //   target= myMotor.getTargetPosition();    // For adding to dashboard
+     //   power= myMotor.getPower();              // For adding to dashboard
+     //   AtTarget = (Math.abs(position-target)<Constants.IntakeShooter.tolerance);  // For adding to dashboard
         // If motor is within tolerance set motor power to 0 enabling the break
         /*TODO: check motor to insure it is not overheating. If statement below was commented
         *  out to insure it is not causing the elevator to not go down correctly. */
-        if (!myMotor.isBusy() && (bucketPosition == "down")){
-            myMotor.setPower(0.0);
-        }
+     //   if (!myMotor.isBusy() && (bucketPosition == "down")){
+     //       myMotor.setPower(0.0);
+     //   }
+
     }
 
     public void servoRecieve (){
-        myServo.setPosition(Constants.Bucket.recievePosition);
-        myOpMode.telemetry.addData("Servo Position",Constants.Bucket.recievePosition);
+        myServo.setPosition(Constants.IntakeShooter.recievePosition);
+        myOpMode.telemetry.addData("Servo Position",Constants.IntakeShooter.recievePosition);
     }
 
     public int step=0;
