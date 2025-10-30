@@ -105,14 +105,6 @@ public class DecodeTeleOp extends LinearOpMode {
             //  if (gamepad1.a) {specimenElevator.();
             // }
 
-                    /*
-                    TODO Cannot raise specimen if bucket motor is forward / bucket is back
-                    TODO We cant lower the bucket if the specimen is up
-                    TODO We cant raise the bucket side if the intake is over it
-                    TODO We cant rotate the bucket position if the bucket is in the dumping position
-                    TODO dont let intake go into position unleess the bucket is down
-                    TODO dont allow to dump bucket if its in its low position
-               */
 
             //Variables for the specimen subsystem.
             telemetry.addData("Bot heading", drivetrain.heading);
