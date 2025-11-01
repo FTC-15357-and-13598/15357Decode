@@ -59,7 +59,7 @@ import org.firstinspires.ftc.teamcode.utility.*;
 public class DecodeTeleOp extends LinearOpMode {
     //get an instances of subsystem classes.
     private MoMoreBotsDrivetrain drivetrain = new MoMoreBotsDrivetrain(this);
-    //private intakeShooter intakeShooter = intakeShooter.getInstance(this);
+    //private instance intakeShooter = intakeShooter.getInstance(this);
 
     // Get instance of Dashboard. Make sure update telemetry and sen packet are at end of opmode
     FtcDashboard dashboard = FtcDashboard.getInstance();
@@ -86,6 +86,7 @@ public class DecodeTeleOp extends LinearOpMode {
 
         //Initialize Drivetrain
         drivetrain.initialize(3);
+
         //specimenElevator.toDown();
 
         waitForStart();
