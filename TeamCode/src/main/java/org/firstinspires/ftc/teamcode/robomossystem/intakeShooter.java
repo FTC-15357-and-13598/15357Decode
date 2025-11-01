@@ -2,46 +2,49 @@ package org.firstinspires.ftc.teamcode.robomossystem;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.utility.Constants;
 
-/**
- * This is a test class of a variety of functions, not to be used.
- */
-// TODO Turn off motor when not in use
+// Create class for intake and shooter subsystem
 public class intakeShooter {
-    // Elevator Constructor
-    public intakeShooter(LinearOpMode opmode) {
+    // Private instance fo singleton pattern
+    private static intakeShooter instance;
+
+    //Private consturctor contaning installation code
+    private intakeShooter(LinearOpMode opmode) {
+        //Define and configure dardware
+        intakeMotor = myOpMode.hardwareMap.get(DcMotor.class, Constants.IntakeShooter.intakeMotor);
+        intakeMotor.setDirection(Constants.IntakeShooter.intakeDirection);
+        intakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        shooterMotor = myOpMode.hardwareMap.get(DcMotorEx.class,Constants.IntakeShooter.shooterMotor);
+        shooterMotor.setDirection(Constants.IntakeShooter.shooterDirection);
+        intakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        shooterServo = myOpMode.hardwareMap.get(Servo.class, Constants.IntakeShooter.intakeServo);
+        shooterServo.setDirection(Constants.IntakeShooter.intkServDirec);
+
         myOpMode = opmode;
     }
 
+    //Public get instance for opmode to access class
+    public static intakeShooter getInstance(){
+        if (instance ==null)
+            instance = new intakeShooter(getInstance().myOpMode);
+        return instance;
+    }
+
+
+
     // Declare motor with encoder and servo
     private static DcMotor intakeMotor = null;
-    private static Servo myServo = null;
+    private static DcMotorEx shooterMotor = null;
+    private static Servo shooterServo = null;
 
     // Define a constructor that allows the OpMode to pass a reference
     private LinearOpMode myOpMode;
 
-    /**
-     * Initialize all the robot's hardware.
-     * This method must be called ONCE when the OpMode is initialized.
-     * <
-     * All of the hardware devices are accessed via the hardware map, and initialized.
-     **/
-    public void init() {
-        // Define and Initialize Motors and servos (note: need to use reference to actual OpMode).
-        intakeMotor = myOpMode.hardwareMap.get(DcMotor.class, Constants.IntakeShooter.MOTOR);
-        myServo = myOpMode.hardwareMap.get(Servo.class, Constants.IntakeShooter.Servo);
-        myServo.setPosition(Constants.IntakeShooter.recievePosition);
 
-        // Set the drive motor directions:
-        // "Reverse" the motor that runs backwards when connected directly to the battery
-        // Set to FORWARD if using AndyMark motors
-        intakeMotor.setDirection(Constants.IntakeShooter.Direction);
-        intakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
-        // Set the drive motor modes to run with and 0 encoder
 
     /** This void will be called by both Teleop and Auton to execute periodic items required when
      * other items are not being called by the teleop or auton. Variables declared between this
@@ -68,9 +71,34 @@ public class intakeShooter {
 
     }
 
-    public void servoRecieve (){
-        myServo.setPosition(Constants.IntakeShooter.recievePosition);
-        myOpMode.telemetry.addData("Servo Position",Constants.IntakeShooter.recievePosition);
+    public void runIntake (){
+       intakeMotor.setPower(Constants.IntakeShooter.intakePower);
+        myOpMode.telemetry.addData("Intake Power",Constants.IntakeShooter.intakePower);
+    }
+
+    public void stopIntake (){
+        intakeMotor.setPower(0.0);
+        myOpMode.telemetry.addData("Intake Power",0.0);
+    }
+
+    public void reverseIntake (){
+        intakeMotor.setPower(Constants.IntakeShooter.intakeRevPower);
+        myOpMode.telemetry.addData("Intake Power",Constants.IntakeShooter.intakeRevPower);
+    }
+
+    public void shoot(){
+        shooterMotor.setPower(Constants.IntakeShooter.shootPower);
+        myOpMode.telemetry.addData("Shooter Power",Constants.IntakeShooter.shootPower);
+    }
+
+    public void revShooter(){
+        shooterMotor.setPower(Constants.IntakeShooter.shooterBackUpPower);
+        myOpMode.telemetry.addData("Shooter Power",Constants.IntakeShooter.shooterBackUpPower);
+    }
+
+    public void stopShooter(){
+        shooterMotor.setPower(0.0);
+        myOpMode.telemetry.addData("Shooter Power",0.0);
     }
 
     public int step=0;

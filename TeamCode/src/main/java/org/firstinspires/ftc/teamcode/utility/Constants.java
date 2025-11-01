@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.utility;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.hardware.sparkfun.SparkFunOTOS;
+import com.qualcomm.robotcore.hardware.Servo;
 
 public class Constants {
     // Create subclasses for the Drivetrain and each control item such as servos and motors.
@@ -63,21 +64,24 @@ public class Constants {
     }
     public static final class IntakeShooter {
         // Drivetrain Motors, Define configured name and direction
-        public static final String MOTOR = "viperRight";
-        public static final DcMotorSimple.Direction Direction =DcMotorSimple.Direction.REVERSE;
+        public static final String shooterMotor = "shooterMotor1";
+        public static final DcMotorSimple.Direction shooterDirection =DcMotorSimple.Direction.REVERSE;
 
-        public static final double defaultPower         =0.75;
-        public static final int tolerance               =2;
+        public static final String intakeMotor = "intakeMotor";
+        public static final DcMotorSimple.Direction intakeDirection =DcMotorSimple.Direction.FORWARD;
 
-        public static final int DownPosition            = 5;
-        public static final int LowBucketPosition       = 1340;
-        public static final int BarBucketPosition       = 825;
-        public static final int HighBucketPosition      = 3050; //1504->1800->2400>3200
+        public static final String intakeServo = "intakeServo";
+        public static final Servo.Direction intkServDirec = com.qualcomm.robotcore.hardware.Servo.Direction.FORWARD;
 
-        public static final String Servo                ="dumpServo";
-        public static final double recievePosition      = 0.35;
-        public static final double dumpPosition         = 0.47;
-        public static final double raisePosition         = 0.38;
+        public static final double shootPower         =0.75;
+        public static final double shooterBackUpPower =0.2;
+
+        public static final double intakePower          =1.0;
+        public static final double intakeRevPower       =-0.2;
+
+        public static final double servoStop    =0.5;
+        public static final double servoShoot   = 0.0;
+        public static final double servoReverse =0.8;
     }
 
     public static final class Telemetry {

@@ -227,7 +227,7 @@ public class MoMoreBotsDrivetrain {
     public void strafe(double distanceInches, double power, double holdTime) {
         double dX,dY,angle;
         if (otosHead<= 90){
-             // Direction of travel is 90 greater than current heading
+             // shooterDirection of travel is 90 greater than current heading
             angle=otosHead+90;
             }
         else {
@@ -266,7 +266,7 @@ public class MoMoreBotsDrivetrain {
         dY = otosYPostion + xDistanceInches*Math.sin(Math.toRadians(otosHead));
         //Calculate Strafe portion of new distance on field
         if (otosHead<= 90){
-            // Direction of travel is 90 greater than current heading
+            // shooterDirection of travel is 90 greater than current heading
             angle=otosHead+90;
         }
         else {

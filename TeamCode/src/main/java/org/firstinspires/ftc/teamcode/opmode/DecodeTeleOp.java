@@ -59,7 +59,7 @@ import org.firstinspires.ftc.teamcode.utility.*;
 public class DecodeTeleOp extends LinearOpMode {
     //get an instances of subsystem classes.
     private MoMoreBotsDrivetrain drivetrain = new MoMoreBotsDrivetrain(this);
-    private intakeShooter intakeShooter = new intakeShooter(this);
+    //private intakeShooter intakeShooter = intakeShooter.getInstance(this);
 
     // Get instance of Dashboard. Make sure update telemetry and sen packet are at end of opmode
     FtcDashboard dashboard = FtcDashboard.getInstance();
@@ -86,7 +86,6 @@ public class DecodeTeleOp extends LinearOpMode {
 
         //Initialize Drivetrain
         drivetrain.initialize(3);
-        intakeShooter.init();
         //specimenElevator.toDown();
 
         waitForStart();
@@ -97,7 +96,7 @@ public class DecodeTeleOp extends LinearOpMode {
              do these first as some of the voids called by the commands and other sequences
              require data from the periodic functions.
              */
-            intakeShooter.periodic();
+            intakeShooter.getInstance().periodic();
             dummy =drivetrain.periodic(); //This is called as a variable for scheduling reasons
 
             //If gamepad1 a is pressed move servotest to 0.05
@@ -118,11 +117,6 @@ public class DecodeTeleOp extends LinearOpMode {
 
 
 
-
-            if (gamepad2.a) {
-                intakeShooter.servoRecieve();
-                intakeShooter.toDown();
-            }
 
 
 
@@ -162,10 +156,6 @@ public class DecodeTeleOp extends LinearOpMode {
                 packet.put("Left Rear Power", drivetrain.LRpower);
                 packet.put("Right Front Power", drivetrain.RFpower);
                 packet.put("Right Rear Power", drivetrain.RRpower);
-                packet.put("Bucket Elevator Position", intakeShooter.position);
-                packet.put("Bucket Elevator Target", intakeShooter.target);
-                packet.put("Bucket Elevator at Target", intakeShooter.AtTarget);
-                packet.put("Bucket Elevator Motor Power", intakeShooter.power);
 
                 dashboard.sendTelemetryPacket(packet);
             }
