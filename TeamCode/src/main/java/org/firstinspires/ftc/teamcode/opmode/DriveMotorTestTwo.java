@@ -118,6 +118,8 @@ public class DriveMotorTestTwo extends LinearOpMode {
         intakeServo.setDirection(Servo.Direction.FORWARD);
         double speedModifier;   //speed modifier for turbo
 
+        shooterMotor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        intakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         // Wait for the game to start (driver presses PLAY) This will display on the Driver Station.
         telemetry.addData("Status", "Initialized");
 

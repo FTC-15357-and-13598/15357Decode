@@ -53,7 +53,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.robomossystem.*;
 import org.firstinspires.ftc.teamcode.utility.*;
 
-@TeleOp(name="Field Centered Teleop", group="Linear OpMode")
+@TeleOp(name="Decode Teleop", group="Linear OpMode")
 
 
 public class DecodeTeleOp extends LinearOpMode {
@@ -75,7 +75,7 @@ public class DecodeTeleOp extends LinearOpMode {
         /* Initialize the hardware variables. Note that the strings used here must correspond
          * to the names assigned during the robot configuration step on the DS or RC devices.
          * These names are critical, label the front of the robot as FRONT. This will be
-         * important later! Don't Iinitialize motors or IMU, they are part of the drivedrain.
+         * important later! Don't initialize motors or IMU, they are part of the drivetrain.
          */
 
         /*
@@ -97,7 +97,7 @@ public class DecodeTeleOp extends LinearOpMode {
              do these first as some of the voids called by the commands and other sequences
              require data from the periodic functions.
              */
-            intakeShooter.getInstance().periodic();
+            //intakeShooter.getInstance().periodic();
             dummy =drivetrain.periodic(); //This is called as a variable for scheduling reasons
 
             //If gamepad1 a is pressed move servotest to 0.05
