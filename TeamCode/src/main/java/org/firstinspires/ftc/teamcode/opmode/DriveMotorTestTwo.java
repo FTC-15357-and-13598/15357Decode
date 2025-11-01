@@ -223,7 +223,7 @@ public class DriveMotorTestTwo extends LinearOpMode {
 
             }//was .7
             else if (gamepad1.x){shooterMotor1.setPower(-0.3);
-                    intakeServo.setPosition(0.8);}
+                    intakeServo.setPosition(1.0);}
             else {shooterMotor1.setPower(0);
                 intakeServo.setPosition(0.5);}
 
@@ -231,7 +231,7 @@ public class DriveMotorTestTwo extends LinearOpMode {
             if (gamepad1.b){intakeMotor.setPower(1.0);}
             else {intakeMotor.setPower(0);}
             if (gamepad1.a) {intakeServo.setPosition(0);}
-            else if (isShooting==false){intakeServo.setPosition(0.5);}
+            //else if (isShooting==false){intakeServo.setPosition(0.5);}
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
