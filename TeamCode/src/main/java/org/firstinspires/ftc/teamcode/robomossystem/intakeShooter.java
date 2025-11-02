@@ -63,10 +63,6 @@ public class intakeShooter {
      //   power= myMotor.getPower();              // For adding to dashboard
      //   AtTarget = (Math.abs(position-target)<Constants.IntakeShooter.tolerance);  // For adding to dashboard
         // If motor is within tolerance set motor power to 0 enabling the break
-        /*TODO: check motor to insure it is not overheating. If statement below was commented
-        *  out to insure it is not causing the elevator to not go down correctly. */
-     //   if (!myMotor.isBusy() && (bucketPosition == "down")){
-     //       myMotor.setPower(0.0);
      //   }
 
     }
@@ -86,7 +82,7 @@ public class intakeShooter {
         myOpMode.telemetry.addData("Intake Power",Constants.IntakeShooter.intakeRevPower);
     }
 
-    public void shoot(){
+    public void runShooter(){
         shooterMotor.setPower(Constants.IntakeShooter.shootPower);
         myOpMode.telemetry.addData("Shooter Power",Constants.IntakeShooter.shootPower);
     }
@@ -101,11 +97,27 @@ public class intakeShooter {
         myOpMode.telemetry.addData("Shooter Power",0.0);
     }
 
-    public int step=0;
-    public void scoreBucket() {
-        step=1;
+    public boolean shootAtSpd = (shooterMotor.getPower() >1600.0);
+
+    public void servoForward(){
+        shooterServo.setPosition(Constants.IntakeShooter.servoShoot);
     }
 
-    public void toDown() {
+    public void stopServo(){
+        shooterServo.setPosition(Constants.IntakeShooter.servoStop);
+    }
+
+    public void servoReverse(){
+        shooterServo.setPosition(Constants.IntakeShooter.servoStop);
+    }
+
+    public void shoot(){
+        runShooter();
+        if (shootAtSpd) {
+            servoForward();
+        }
+        else {
+            stopServo();
+        }
     }
 }

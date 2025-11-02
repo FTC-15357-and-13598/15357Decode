@@ -59,7 +59,7 @@ import org.firstinspires.ftc.teamcode.utility.*;
 public class DecodeTeleOp extends LinearOpMode {
     //get an instances of subsystem classes.
     private MoMoreBotsDrivetrain drivetrain = new MoMoreBotsDrivetrain(this);
-    //private instance intakeShooter = intakeShooter.getInstance(this);
+    intakeShooter intksht= intakeShooter.getInstance();
 
     // Get instance of Dashboard. Make sure update telemetry and sen packet are at end of opmode
     FtcDashboard dashboard = FtcDashboard.getInstance();
@@ -78,12 +78,6 @@ public class DecodeTeleOp extends LinearOpMode {
          * important later! Don't initialize motors or IMU, they are part of the drivetrain.
          */
 
-        /*
-         * This initializes the servoTest servo. You would initialize other servos using the same method.
-         */
-
-        //servoTest = hardwareMap.get(Servo.class, "servoTest");
-
         //Initialize Drivetrain
         drivetrain.initialize(3);
 
@@ -97,7 +91,7 @@ public class DecodeTeleOp extends LinearOpMode {
              do these first as some of the voids called by the commands and other sequences
              require data from the periodic functions.
              */
-            //intakeShooter.getInstance().periodic();
+            intksht.periodic();
             dummy =drivetrain.periodic(); //This is called as a variable for scheduling reasons
 
             //If gamepad1 a is pressed move servotest to 0.05
@@ -110,15 +104,34 @@ public class DecodeTeleOp extends LinearOpMode {
             telemetry.addData("Bot heading", drivetrain.heading);
             telemetry.addData("Bucket Servo", gamepad2.y);
 
-
-
-
-
-
-
-
-
-
+            // Gamepad inputs
+            // Run shooter servo on a
+            if (gamepad1.a) {
+                intksht.servoForward();
+            } else if (gamepad1.aWasReleased()) {
+                intksht.stopServo();
+            }
+            // Run intake on b, stop when released
+            if (gamepad1.b) {
+                intksht.runIntake();
+            } else if (gamepad1.backWasReleased()) {
+                intksht.stopIntake();
+            }
+            // Reverse servo and shooter on x, stop when released
+            if (gamepad1.x) {
+                intksht.servoReverse();
+                intksht.revShooter();
+            } else if (gamepad1.xWasReleased()) {
+                intksht.stopServo();
+                intksht.stopShooter();
+            }
+            // Shoot on y, stop when released
+            if (gamepad1.y){
+                intksht.shoot();
+            } else if (gamepad1.yWasReleased()){
+                intksht.stopServo();
+                intksht.stopShooter();
+            }
 
 
 
