@@ -58,7 +58,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@TeleOp(name="Just Field Centric Test", group="Linear OpMode")
+@TeleOp(name="Just Field Centric Test 2", group="Linear OpMode")
 //@Disabled
 public class DriveMotorTestTwo extends LinearOpMode {
 
@@ -224,7 +224,7 @@ public class DriveMotorTestTwo extends LinearOpMode {
                     isShooting=false;}
 
             }//was .7
-            else if (gamepad1.x){shooterMotor1.setPower(-0.3);
+            else if (gamepad1.x){shooterMotor1.setPower(-0.8);
                     intakeServo.setPosition(1.0);}
             else {shooterMotor1.setPower(0);
                 intakeServo.setPosition(0.5);}

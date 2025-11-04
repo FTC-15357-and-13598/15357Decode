@@ -59,7 +59,7 @@ import org.firstinspires.ftc.teamcode.utility.*;
 public class DecodeTeleOp extends LinearOpMode {
     //get an instances of subsystem classes.
     private MoMoreBotsDrivetrain drivetrain = new MoMoreBotsDrivetrain(this);
-    intakeShooter intksht= intakeShooter.getInstance();
+   // intakeShooter intksht= new intakeShooter(this);
 
     // Get instance of Dashboard. Make sure update telemetry and sen packet are at end of opmode
     FtcDashboard dashboard = FtcDashboard.getInstance();
@@ -91,7 +91,7 @@ public class DecodeTeleOp extends LinearOpMode {
              do these first as some of the voids called by the commands and other sequences
              require data from the periodic functions.
              */
-            intksht.periodic();
+            //intksht.periodic();
             dummy =drivetrain.periodic(); //This is called as a variable for scheduling reasons
 
             //If gamepad1 a is pressed move servotest to 0.05
@@ -103,7 +103,7 @@ public class DecodeTeleOp extends LinearOpMode {
             //Variables for the specimen subsystem.
             telemetry.addData("Bot heading", drivetrain.heading);
             telemetry.addData("Bucket Servo", gamepad2.y);
-
+/*
             // Gamepad inputs
             // Run shooter servo on a
             if (gamepad1.a) {
@@ -132,7 +132,7 @@ public class DecodeTeleOp extends LinearOpMode {
                 intksht.stopServo();
                 intksht.stopShooter();
             }
-
+*/
 
 
             //Reset Yaw of IMU for FC drive if Driver hits back

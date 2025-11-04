@@ -13,7 +13,7 @@ public class intakeShooter {
     private static intakeShooter instance;
 
     //Private consturctor contaning installation code
-    private intakeShooter(LinearOpMode opmode) {
+    public intakeShooter(LinearOpMode opmode) {
         //Define and configure dardware
         intakeMotor = myOpMode.hardwareMap.get(DcMotor.class, Constants.IntakeShooter.intakeMotor);
         intakeMotor.setDirection(Constants.IntakeShooter.intakeDirection);
@@ -28,11 +28,11 @@ public class intakeShooter {
     }
 
     //Public get instance for opmode to access class
-    public static intakeShooter getInstance(){
-        if (instance ==null)
-            instance = new intakeShooter(getInstance().myOpMode);
-        return instance;
-    }
+   // public static intakeShooter getInstance(){
+   //     if (instance ==null)
+   //         instance = new intakeShooter(getInstance().myOpMode);
+   //     return instance;
+   // }
 
 
 
