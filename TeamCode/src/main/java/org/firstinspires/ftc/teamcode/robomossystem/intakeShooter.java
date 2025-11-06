@@ -14,7 +14,11 @@ public class intakeShooter {
 
     //Private consturctor contaning installation code
     public intakeShooter(LinearOpMode opmode) {
-        //Define and configure dardware
+        myOpMode = opmode;
+    }
+
+    public void init (){
+        //Define and configure hardware
         intakeMotor = myOpMode.hardwareMap.get(DcMotor.class, Constants.IntakeShooter.intakeMotor);
         intakeMotor.setDirection(Constants.IntakeShooter.intakeDirection);
         intakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -24,9 +28,7 @@ public class intakeShooter {
         shooterServo = myOpMode.hardwareMap.get(Servo.class, Constants.IntakeShooter.intakeServo);
         shooterServo.setDirection(Constants.IntakeShooter.intkServDirec);
 
-        myOpMode = opmode;
     }
-
     //Public get instance for opmode to access class
    // public static intakeShooter getInstance(){
    //     if (instance ==null)
@@ -56,15 +58,11 @@ public class intakeShooter {
     public double power;
     public boolean AtTarget;
     public String bucketPosition = null;
+    public boolean shootAtSpd;
 
     public void periodic(){
-     //   position =myMotor.getCurrentPosition(); // For adding to dashboard
-     //   target= myMotor.getTargetPosition();    // For adding to dashboard
-     //   power= myMotor.getPower();              // For adding to dashboard
-     //   AtTarget = (Math.abs(position-target)<Constants.IntakeShooter.tolerance);  // For adding to dashboard
-        // If motor is within tolerance set motor power to 0 enabling the break
-     //   }
 
+        shootAtSpd = (shooterMotor.getVelocity() >1600.0);
     }
 
     public void runIntake (){
@@ -97,7 +95,7 @@ public class intakeShooter {
         myOpMode.telemetry.addData("Shooter Power",0.0);
     }
 
-    public boolean shootAtSpd = (shooterMotor.getPower() >1600.0);
+
 
     public void servoForward(){
         shooterServo.setPosition(Constants.IntakeShooter.servoShoot);

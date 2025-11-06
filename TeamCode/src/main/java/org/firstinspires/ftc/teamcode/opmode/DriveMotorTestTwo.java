@@ -117,6 +117,7 @@ public class DriveMotorTestTwo extends LinearOpMode {
         shooterMotor1.setDirection(DcMotorEx.Direction.REVERSE);
         intakeServo.setDirection(Servo.Direction.FORWARD);
         double speedModifier;   //speed modifier for turbo
+        intakeServo.setPosition(0.5);
 
         shooterMotor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         intakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -214,9 +215,9 @@ public class DriveMotorTestTwo extends LinearOpMode {
             if (gamepad1.dpad_left){rightFrontDrive.setPower(1.0);}
             if (gamepad1.dpad_right){rightBackDrive.setPower(1.0);}
 
-            if (gamepad1.y){
+            if (gamepad2.y){
                 shooterMotor1.setPower(0.75);
-                if (shooterVelocity>1600){isShooting=true;
+                if (shooterVelocity>1800){isShooting=true;
                     intakeServo.setPosition(0);
 
                 }
@@ -224,15 +225,17 @@ public class DriveMotorTestTwo extends LinearOpMode {
                     isShooting=false;}
 
             }//was .7
-            else if (gamepad1.x){shooterMotor1.setPower(-0.8);
+            else if (gamepad2.x){shooterMotor1.setPower(-0.8);
                     intakeServo.setPosition(1.0);}
             else {shooterMotor1.setPower(0);
                 intakeServo.setPosition(0.5);}
 
 
-            if (gamepad1.b){intakeMotor.setPower(1.0);}
+            if (gamepad2.b){intakeMotor.setPower(1.0);}
             else {intakeMotor.setPower(0);}
-            if (gamepad1.a) {intakeServo.setPosition(0);}
+            if (gamepad2.a) {intakeServo.setPosition(0);}
+
+
             //else if (isShooting==false){intakeServo.setPosition(0.5);}
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
@@ -241,6 +244,7 @@ public class DriveMotorTestTwo extends LinearOpMode {
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontDrive.getPower(), rightFrontDrive.getPower());
             //Read encoder velocity for back motors
             telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackDrive.getPower(), rightBackDrive.getPower());
+            telemetry.addData("shooter speed",shooterMotor1.getVelocity());
             telemetry.update();
         }
     }
