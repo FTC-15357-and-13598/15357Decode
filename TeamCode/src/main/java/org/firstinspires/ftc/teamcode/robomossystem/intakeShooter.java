@@ -95,8 +95,6 @@ public class intakeShooter {
         myOpMode.telemetry.addData("Shooter Power",0.0);
     }
 
-
-
     public void servoForward(){
         shooterServo.setPosition(Constants.IntakeShooter.servoShoot);
     }
