@@ -104,36 +104,35 @@ public class DecodeTeleOp extends LinearOpMode {
             //Variables for the specimen subsystem.
             telemetry.addData("Bot heading", drivetrain.heading);
             telemetry.addData("Bucket Servo", gamepad2.y);
-/*
+
             // Gamepad inputs
             // Run shooter servo on a
-            if (gamepad1.a) {
+            if (gamepad2.a) {
                 intksht.servoForward();
-            } else if (gamepad1.aWasReleased()) {
+            } else if (gamepad2.aWasReleased()) {
                 intksht.stopServo();
             }
             // Run intake on b, stop when released
-            if (gamepad1.b) {
+            if (gamepad2.b) {
                 intksht.runIntake();
-            } else if (gamepad1.backWasReleased()) {
+            } else if (gamepad2.backWasReleased()) {
                 intksht.stopIntake();
             }
             // Reverse servo and shooter on x, stop when released
-            if (gamepad1.x) {
+            if (gamepad2.x) {
                 intksht.servoReverse();
                 intksht.revShooter();
-            } else if (gamepad1.xWasReleased()) {
+            } else if (gamepad2.xWasReleased()) {
                 intksht.stopServo();
                 intksht.stopShooter();
             }
             // Shoot on y, stop when released
-            if (gamepad1.y){
+            if (gamepad2.y){
                 intksht.shoot();
-            } else if (gamepad1.yWasReleased()){
+            } else if (gamepad2.yWasReleased()){
                 intksht.stopServo();
                 intksht.stopShooter();
             }
-*/
 
 
             //Reset Yaw of IMU for FC drive if Driver hits back
