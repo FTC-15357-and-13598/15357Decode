@@ -59,7 +59,8 @@ import org.firstinspires.ftc.teamcode.utility.*;
 public class DecodeTeleOp extends LinearOpMode {
     //get an instances of subsystem classes.
     private MoMoreBotsDrivetrain drivetrain = new MoMoreBotsDrivetrain(this);
-   private intakeShooter intksht= new intakeShooter(this);
+    private intakeShooter intksht= new intakeShooter(this);
+    private vision vision = new vision(this);
 
     // Get instance of Dashboard. Make sure update telemetry and sen packet are at end of opmode
     FtcDashboard dashboard = FtcDashboard.getInstance();
@@ -67,7 +68,14 @@ public class DecodeTeleOp extends LinearOpMode {
 
     public String specimenPosition = null;
     boolean dummy;
-    //private Servo servoTest = null;
+
+    /*TODO read alliance from singleton set by auton*/
+    String alliance = null;
+    // Variables for drivetrain
+    double xComponent =0;
+    double yComponent =0;
+
+
 
     @Override
     public void runOpMode() {
@@ -79,8 +87,24 @@ public class DecodeTeleOp extends LinearOpMode {
          */
 
         //Initialize Drivetrain
-        drivetrain.initialize(3);
-        intksht.init();;
+        drivetrain.initialize(1);
+        intksht.init();
+        vision.init();
+
+        //Ask operator which alliance they are on
+        while (alliance == null){
+            if (gamepad1.a) {alliance="Red";}
+            if (gamepad1.b) {alliance="Blue";}
+            telemetry.addLine("Please Select which Alliance");
+            telemetry.addLine("Press A for Red and B for Blue");
+            telemetry.update();
+        }
+        telemetry.addData("Selected Alliance", alliance);
+        telemetry.update();
+
+
+        waitForStart();
+
 
         //specimenElevator.toDown();
 
@@ -95,10 +119,7 @@ public class DecodeTeleOp extends LinearOpMode {
             intksht.periodic();
             dummy =drivetrain.periodic(); //This is called as a variable for scheduling reasons
 
-            //If gamepad1 a is pressed move servotest to 0.05
-            //Servo is a 5 rotation servo so 1 rotation is 360 degrees and 0.05 is 18 degrees
-            //  if (gamepad1.a) {specimenElevator.();
-            // }
+
 
 
             //Variables for the specimen subsystem.
@@ -151,11 +172,29 @@ public class DecodeTeleOp extends LinearOpMode {
             if (gamepad1.right_trigger > 0.1) {
                 speedfact = 0.8;
             }
+
+            //Determine X and Y values to send to drivetrain based on Alliance
+            if (alliance == "Blue"){
+                xComponent = gamepad1.left_stick_y;
+                yComponent = gamepad1.left_stick_x;
+            } else {
+                xComponent = gamepad1.left_stick_y * -1;
+                yComponent = gamepad1.left_stick_x *-1;
+            }
+
             //Call Field Centric void in drivetrain.
             //Commented out field centric
             // TODO Uncomment the below line to go back to robot FC, but then comment the moveRobot line
-            drivetrain.moveRobotFC(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x, speedfact);
-            // drivetrain.moveRobot(gamepad1.left_stick_x,-gamepad1.left_stick_y,gamepad1.right_stick_x);
+            //calculate alignment
+            double alignTurn;//// = vision.tagHeading() * Constants.Drivetrain.alignGain;
+            if (gamepad1.a) {
+                //calculate alignment
+                alignTurn = vision.tagHeading() * Constants.Drivetrain.alignGain;
+                drivetrain.moveRobotFC(xComponent, yComponent, alignTurn, speedfact);
+            } else {
+                drivetrain.moveRobotFC(xComponent, yComponent, gamepad1.right_stick_x, speedfact);
+                // drivetrain.moveRobot(gamepad1.left_stick_x,-gamepad1.left_stick_y,gamepad1.right_stick_x);
+            }
 
             //update dashboard and telemetry if used
             if (Constants.Telemetry.showTelemetry) {

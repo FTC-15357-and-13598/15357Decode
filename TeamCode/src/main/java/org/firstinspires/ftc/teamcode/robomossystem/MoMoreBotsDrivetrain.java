@@ -150,7 +150,7 @@ public class MoMoreBotsDrivetrain {
         aMotor.setDirection(direction);
         aMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);  // Reset Encoders to zero
         aMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        aMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);  // Requires motor encoder cables to be hooked up.
+        aMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);  // Requires motor encoder cables to be hooked up.
         return aMotor;
     }
 

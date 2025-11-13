@@ -14,9 +14,9 @@ public class Constants {
 
         // Drivetrain Motors, Define configured name and direction
         public static final String MOTOR_LF = "leftFrontDrive";
-        public static final DcMotorSimple.Direction LF_Direction =DcMotorSimple.Direction.FORWARD;
+        public static final DcMotorSimple.Direction LF_Direction =DcMotorSimple.Direction.REVERSE;
         public static final String MOTOR_LB = "leftBackDrive";
-        public static final DcMotorSimple.Direction LB_Direction =DcMotorSimple.Direction.FORWARD;
+        public static final DcMotorSimple.Direction LB_Direction =DcMotorSimple.Direction.REVERSE;
         public static final String MOTOR_RF = "rightFrontDrive";
         public static final DcMotorSimple.Direction RF_Direction =DcMotorSimple.Direction.FORWARD;
         public static final String MOTOR_RB = "rightBackDrive";
@@ -54,18 +54,20 @@ public class Constants {
         public static final String Otos ="otos"; // Define Devicename for Otos
 
         //Todo define starting linear and angular scalers, offset on robot and starting pose
-        public static final SparkFunOTOS.Pose2D offset = new SparkFunOTOS.Pose2D(0,0,180); // Offset for Otos mounting on robot
+        public static final SparkFunOTOS.Pose2D offset = new SparkFunOTOS.Pose2D(0,0,0); // Offset for Otos mounting on robot
         public static final double linearScaler = 1.02;
         public static final double angularScaler = 1.0;
 
-        public static final SparkFunOTOS.Pose2D Specimen = new SparkFunOTOS.Pose2D(9.0,62.0,180.0); // Starting position for blue specimen position
+        public static final SparkFunOTOS.Pose2D Specimen = new SparkFunOTOS.Pose2D(36,9,180.0); // Starting position for blue specimen position
         public static final SparkFunOTOS.Pose2D Bucket = new SparkFunOTOS.Pose2D(8.5,110.0,0.0); // Starting position for blue bucket position
+
+        public static final double alignGain =0.1; //Gain for Auto align
 
     }
     public static final class IntakeShooter {
         // Drivetrain Motors, Define configured name and direction
         public static final String shooterMotor = "shooterMotor1";
-        public static final DcMotorSimple.Direction shooterDirection =DcMotorSimple.Direction.REVERSE;
+        public static final DcMotorSimple.Direction shooterDirection =DcMotorSimple.Direction.FORWARD;
 
         public static final String intakeMotor = "intakeMotor";
         public static final DcMotorSimple.Direction intakeDirection =DcMotorSimple.Direction.FORWARD;
@@ -74,7 +76,7 @@ public class Constants {
         public static final Servo.Direction intkServDirec = com.qualcomm.robotcore.hardware.Servo.Direction.FORWARD;
 
         public static final double shootPower         =0.75;
-        public static final double shooterBackUpPower =0.2;
+        public static final double shooterBackUpPower =-0.2;
 
         public static final double intakePower          =1.0;
         public static final double intakeRevPower       =-0.2;
