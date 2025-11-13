@@ -93,10 +93,10 @@ public class DecodeTeleOp extends LinearOpMode {
 
         //Ask operator which alliance they are on
         while (alliance == null){
-            if (gamepad1.a) {alliance="Red";}
-            if (gamepad1.b) {alliance="Blue";}
+            if (gamepad1.b) {alliance="Red";}
+            if (gamepad1.x) {alliance="Blue";}
             telemetry.addLine("Please Select which Alliance");
-            telemetry.addLine("Press A for Red and B for Blue");
+            telemetry.addLine("Press B for Red and X for Blue");
             telemetry.update();
         }
         telemetry.addData("Selected Alliance", alliance);
