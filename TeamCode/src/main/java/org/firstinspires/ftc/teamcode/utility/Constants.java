@@ -16,7 +16,7 @@ public class Constants {
         public static final String MOTOR_LF = "leftFrontDrive";
         public static final DcMotorSimple.Direction LF_Direction =DcMotorSimple.Direction.FORWARD;
         public static final String MOTOR_LB = "leftBackDrive";
-        public static final DcMotorSimple.Direction LB_Direction =DcMotorSimple.Direction.REVERSE;
+        public static final DcMotorSimple.Direction LB_Direction =DcMotorSimple.Direction.FORWARD;
         public static final String MOTOR_RF = "rightFrontDrive";
         public static final DcMotorSimple.Direction RF_Direction =DcMotorSimple.Direction.FORWARD;
         public static final String MOTOR_RB = "rightBackDrive";
