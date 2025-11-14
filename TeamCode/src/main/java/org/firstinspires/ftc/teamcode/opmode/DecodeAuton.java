@@ -54,16 +54,10 @@ public class DecodeAuton extends LinearOpMode {
     FtcDashboard dashboard = FtcDashboard.getInstance();
     public TelemetryPacket packet = new TelemetryPacket();
 
-    public String specimenPosition = null;
     boolean dummy;
 
-    /*TODO read alliance from singleton set by auton*/
-    String alliance = null;
-    // Variables for drivetrain
-    double xComponent =0;
-    double yComponent =0;
-
-
+        String alliance = null;  // Will be written to alliance data
+    int startingPosition =0; // will prompt for starting position between 1 and 3
 
     @Override
     public void runOpMode() {
@@ -74,10 +68,6 @@ public class DecodeAuton extends LinearOpMode {
          * important later! Don't initialize motors or IMU, they are part of the drivetrain.
          */
 
-        //Initialize Drivetrain
-        drivetrain.initialize(1);
-        intksht.init();
-        vision.init();
 
         //Ask operator which alliance they are on
         while (alliance == null){
@@ -87,10 +77,24 @@ public class DecodeAuton extends LinearOpMode {
             telemetry.addLine("Press B for Red and X for Blue");
             telemetry.update();
         }
+
+        //Ask Operator which starting position the Robot is in
+        while (startingPosition==0){
+            if (gamepad1.a){startingPosition=1;}
+            if (gamepad1.b){startingPosition=2;}
+            if (gamepad1.y){startingPosition=3;}
+        }
+
         telemetry.addData("Selected Alliance", alliance);
+        telemetry.addData("Starting Position", startingPosition);
         telemetry.update();
 
         allianceData.allianceInstance().setAlliance(alliance);
+
+        //Initialize subsystems
+        drivetrain.initialize(1);
+        intksht.init();
+        vision.init();
 
 
         waitForStart();
