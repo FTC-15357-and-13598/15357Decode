@@ -103,31 +103,23 @@ public class DecodeAuton extends LinearOpMode {
         intksht.init();
         vision.init();
 
+        // Set pose of Drivetrain based on Alliance an Starting Position
         if (Objects.equals(alliance, "Blue")){
-            switch (startingPosition){
-                case 1:
-                    drivetrain.setPose(Constants.Drivetrain.B1);
-                    break;
-                case 2:
-                    drivetrain.setPose(Constants.Drivetrain.B2);
-                    break;
-                case 3:
-                    drivetrain.setPose(Constants.Drivetrain.B3);
-                    break;
+            if (startingPosition == 1) {
+                drivetrain.setPose(Constants.Drivetrain.B1);
+            } else if (startingPosition ==2 ) {
+                drivetrain.setPose(Constants.Drivetrain.B2);
+            } else {
+                drivetrain.setPose(Constants.Drivetrain.B3);
             }
         } else {
-            switch (startingPosition){
-                case 1:
-                    drivetrain.setPose(Constants.Drivetrain.R1);
-                    break;
-                case 2:
-                    drivetrain.setPose(Constants.Drivetrain.R2);
-                    break;
-                case 3:
-                    drivetrain.setPose(Constants.Drivetrain.R3);
-                    break;
-        }
-
+            if (startingPosition == 1) {
+                drivetrain.setPose(Constants.Drivetrain.R1);
+            } else if (startingPosition ==2 ) {
+                drivetrain.setPose(Constants.Drivetrain.R2);
+            } else {
+                drivetrain.setPose(Constants.Drivetrain.R3);
+            }
         }
 
 

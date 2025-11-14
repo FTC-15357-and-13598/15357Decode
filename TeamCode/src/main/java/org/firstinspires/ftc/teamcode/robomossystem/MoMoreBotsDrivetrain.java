@@ -119,7 +119,7 @@ public class MoMoreBotsDrivetrain {
 
     public void setPose (SparkFunOTOS.Pose2D pose) {
         myOtos.resetTracking(); //This resets the tracking of the sensor
-        myOtos.setPosition(pose); //This sets the position of the sensor to 0,0,90 as the sensor is currently turned 90 degrees
+        myOtos.setPosition(pose); //This sets the position of the sensor
     }
 
     /**
