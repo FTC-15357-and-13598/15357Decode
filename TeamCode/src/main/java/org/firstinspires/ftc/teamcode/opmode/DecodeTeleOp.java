@@ -122,6 +122,10 @@ public class DecodeTeleOp extends LinearOpMode {
             intksht.periodic();
             dummy =drivetrain.periodic(); //This is called as a variable for scheduling reasons
 
+            if (gamepad1.dpad_right) {
+                drivetrain.setPose(Constants.Drivetrain.B1);
+            }
+
 
 
 
