@@ -54,7 +54,7 @@ public class Constants {
         public static final String Otos ="otos"; // Define Devicename for Otos
 
         //Todo define starting linear and angular scalers, offset on robot and starting pose
-        public static final SparkFunOTOS.Pose2D offset = new SparkFunOTOS.Pose2D(0,0,0); // Offset for Otos mounting on robot
+        public static final SparkFunOTOS.Pose2D offset = new SparkFunOTOS.Pose2D(0,0,180); // Offset for Otos mounting on robot
         public static final double linearScaler = 1.02;
         public static final double angularScaler = 1.0;
 
