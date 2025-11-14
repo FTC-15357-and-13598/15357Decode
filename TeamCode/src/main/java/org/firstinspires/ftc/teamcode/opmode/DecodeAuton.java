@@ -103,9 +103,6 @@ public class DecodeAuton extends LinearOpMode {
         intksht.init();
         vision.init();
 
-
-
-
         waitForStart();
 
         // Set pose of Drivetrain based on Alliance an Starting Position
@@ -134,11 +131,6 @@ public class DecodeAuton extends LinearOpMode {
         }
         telemetry.update();
 
-
-
-        //specimenElevator.toDown();
-
-        waitForStart();
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
