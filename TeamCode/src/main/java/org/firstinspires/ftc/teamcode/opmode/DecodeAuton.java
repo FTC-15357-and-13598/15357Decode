@@ -107,20 +107,27 @@ public class DecodeAuton extends LinearOpMode {
         if (Objects.equals(alliance, "Blue")){
             if (startingPosition == 1) {
                 drivetrain.setPose(Constants.Drivetrain.B1);
+                telemetry.addLine("Please Select Starting Position B1");
             } else if (startingPosition ==2 ) {
                 drivetrain.setPose(Constants.Drivetrain.B2);
+                telemetry.addLine("Please Select Starting Position B2");
             } else {
                 drivetrain.setPose(Constants.Drivetrain.B3);
+                telemetry.addLine("Please Select Starting Position B3");
             }
         } else {
             if (startingPosition == 1) {
                 drivetrain.setPose(Constants.Drivetrain.R1);
+                telemetry.addLine("Please Select Starting Position R1");
             } else if (startingPosition ==2 ) {
                 drivetrain.setPose(Constants.Drivetrain.R2);
+                telemetry.addLine("Please Select Starting Position R2");
             } else {
                 drivetrain.setPose(Constants.Drivetrain.R3);
+                telemetry.addLine("Please Select Starting Position R3");
             }
         }
+        telemetry.update();
 
 
         waitForStart();
@@ -144,6 +151,7 @@ public class DecodeAuton extends LinearOpMode {
 
 
 
+        telemetry.update();
         }
     }
     //Put any super-system type voids here
