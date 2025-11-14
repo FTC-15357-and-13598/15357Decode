@@ -78,31 +78,13 @@ public class MoMoreBotsDrivetrain {
      * Robot Initialization:
      *  Use the hardware map to Connect to devices.
      *  Perform any set-up all the hardware devices.
-     * @param startPosition  Defines where on the field the robot is starting and is
-      *                     used to set pose on the OTOS and define the position
-      *                     of the IMU for FC drive.
-      *  1= Specimen front facing wall, first score will be specimen
-      *  2= Bucket front facing out, fist score will be in bucket
+     *
      */
-    public void initialize(int startPosition)
+    public void initialize()
     {
         //Select start position variables to be use to initialize IMU and Otos
         // define variable as 4 if start position is 1-3 it will be changed below
         RevHubOrientationOnRobot imuOrientation= new RevHubOrientationOnRobot(Constants.Drivetrain.HUB_LOGO_AWAY,Constants.Drivetrain.HUB_USB);
-        SparkFunOTOS.Pose2D pose= Constants.Drivetrain.Specimen;
-        switch (startPosition){
-            case 1:
-                imuOrientation= new RevHubOrientationOnRobot(Constants.Drivetrain.HUB_LOGO_AWAY,Constants.Drivetrain.HUB_USB);
-                pose= Constants.Drivetrain.Specimen;
-                break;
-            case 2:
-                imuOrientation= new RevHubOrientationOnRobot(Constants.Drivetrain.HUB_LOGO_AWAY,Constants.Drivetrain.HUB_USB);
-                pose= Constants.Drivetrain.Bucket;
-                break;
-            case 3:
-                skipsetinit=true;
-        }
-
         // Initialize the hardware variables. Note that the strings used to 'get' each
         // motor/device must match the names assigned during the robot configuration.
 
@@ -121,11 +103,7 @@ public class MoMoreBotsDrivetrain {
         myOtos.setOffset(Constants.Drivetrain.offset); //This tells the Otos where it is mounted on the robot
         myOtos.setLinearScalar(Constants.Drivetrain.linearScaler); //This sets the linear scalar to correct distance measurement
         myOtos.setAngularScalar(Constants.Drivetrain.angularScaler); //This sets the angular scalar to correct angle reading.
-        if (!skipsetinit) {
-            myOtos.resetTracking(); //This resets the tracking of the sensor
-            myOtos.setPosition(pose); //This sets the position of the sensor to 0,0,90 as the sensor is currently turned 90 degrees
-        }
-            myOtos.calibrateImu(255, false); //Always calibrate the IMU
+        myOtos.calibrateImu(255, false); //Always calibrate the IMU
 
         // Set all hubs to use the AUTO Bulk Caching mode for faster encoder reads
         List<LynxModule> allHubs = myOpMode.hardwareMap.getAll(LynxModule.class);
@@ -134,9 +112,14 @@ public class MoMoreBotsDrivetrain {
         }
 
         // Tell the software how the Control Hub is mounted on the robot to align the IMU XYZ axes correctly based on case above
-        if (!skipsetinit){
+
         imu.initialize(new IMU.Parameters(imuOrientation));
-        imu.resetYaw();}
+        imu.resetYaw();
+    }
+
+    public void setPose (SparkFunOTOS.Pose2D pose) {
+        myOtos.resetTracking(); //This resets the tracking of the sensor
+        myOtos.setPosition(pose); //This sets the position of the sensor to 0,0,90 as the sensor is currently turned 90 degrees
     }
 
     /**

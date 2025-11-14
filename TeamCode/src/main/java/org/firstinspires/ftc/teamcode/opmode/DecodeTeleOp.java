@@ -86,8 +86,8 @@ public class DecodeTeleOp extends LinearOpMode {
          * important later! Don't initialize motors or IMU, they are part of the drivetrain.
          */
 
-        //Initialize Drivetrain
-        drivetrain.initialize(1);
+        //Initialize Subsystems
+        drivetrain.initialize();
         intksht.init();
         vision.init();
 

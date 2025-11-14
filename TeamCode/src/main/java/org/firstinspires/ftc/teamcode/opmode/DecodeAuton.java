@@ -41,6 +41,8 @@ import org.firstinspires.ftc.teamcode.robomossystem.MoMoreBotsDrivetrain;
 import org.firstinspires.ftc.teamcode.robomossystem.*;
 import org.firstinspires.ftc.teamcode.utility.Constants;
 
+import java.util.Objects;
+
 @Autonomous(name="Decode Auton", group="Decode", preselectTeleOp = "Decode Teleop")
 
 
@@ -97,9 +99,36 @@ public class DecodeAuton extends LinearOpMode {
         allianceData.allianceInstance().setAlliance(alliance);
 
         //Initialize subsystems
-        drivetrain.initialize(1);
+        drivetrain.initialize();
         intksht.init();
         vision.init();
+
+        if (Objects.equals(alliance, "Blue")){
+            switch (startingPosition){
+                case 1:
+                    drivetrain.setPose(Constants.Drivetrain.B1);
+                    break;
+                case 2:
+                    drivetrain.setPose(Constants.Drivetrain.B2);
+                    break;
+                case 3:
+                    drivetrain.setPose(Constants.Drivetrain.B3);
+                    break;
+            }
+        } else {
+            switch (startingPosition){
+                case 1:
+                    drivetrain.setPose(Constants.Drivetrain.R1);
+                    break;
+                case 2:
+                    drivetrain.setPose(Constants.Drivetrain.R2);
+                    break;
+                case 3:
+                    drivetrain.setPose(Constants.Drivetrain.R3);
+                    break;
+        }
+
+        }
 
 
         waitForStart();
