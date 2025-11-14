@@ -57,7 +57,7 @@ public class DecodeAuton extends LinearOpMode {
     boolean dummy;
 
         String alliance = null;  // Will be written to alliance data
-    int startingPosition =0; // will prompt for starting position between 1 and 3
+        int startingPosition =0; // will prompt for starting position between 1 and 3
 
     @Override
     public void runOpMode() {
@@ -83,6 +83,9 @@ public class DecodeAuton extends LinearOpMode {
             if (gamepad1.a){startingPosition=1;}
             if (gamepad1.b){startingPosition=2;}
             if (gamepad1.y){startingPosition=3;}
+            telemetry.addLine("Please Select Starting Position");
+            telemetry.addLine("Press A for 1, B for 2 or X for 3");
+            telemetry.update();
         }
 
         telemetry.addData("Selected Alliance", alliance);
