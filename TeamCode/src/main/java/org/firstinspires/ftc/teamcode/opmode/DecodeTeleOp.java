@@ -53,7 +53,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.robomossystem.*;
 import org.firstinspires.ftc.teamcode.utility.*;
 
-@TeleOp(name="Decode Teleop", group="Linear OpMode")
+@TeleOp(name="Decode Teleop", group="Decode")
 
 
 public class DecodeTeleOp extends LinearOpMode {
@@ -90,6 +90,9 @@ public class DecodeTeleOp extends LinearOpMode {
         drivetrain.initialize(1);
         intksht.init();
         vision.init();
+
+        // Get allaince from start info
+        alliance= allianceData.allianceInstance().getAlliance();
 
         //Ask operator which alliance they are on
         while (alliance == null){
