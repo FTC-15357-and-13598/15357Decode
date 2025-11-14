@@ -60,6 +60,13 @@ public class Constants {
 
         public static final SparkFunOTOS.Pose2D Specimen = new SparkFunOTOS.Pose2D(36,9,180.0); // Starting position for blue specimen position
         public static final SparkFunOTOS.Pose2D Bucket = new SparkFunOTOS.Pose2D(8.5,110.0,0.0); // Starting position for blue bucket position
+        public static final SparkFunOTOS.Pose2D R1 = new SparkFunOTOS.Pose2D(36,9,180.0); // Starting position red 1
+        public static final SparkFunOTOS.Pose2D R2 = new SparkFunOTOS.Pose2D(36,9,180.0); // Starting position red 2
+        public static final SparkFunOTOS.Pose2D R3 = new SparkFunOTOS.Pose2D(36,9,180.0); // Starting position red 3
+        public static final SparkFunOTOS.Pose2D B1 = new SparkFunOTOS.Pose2D(36,9,180.0); // Starting position blue 1
+        public static final SparkFunOTOS.Pose2D B2 = new SparkFunOTOS.Pose2D(36,9,180.0); // Starting position blue 2
+        public static final SparkFunOTOS.Pose2D B3 = new SparkFunOTOS.Pose2D(36,9,180.0); // Starting position blue 3
+
 
         public static final double alignGain =0.1; //Gain for Auto align
 

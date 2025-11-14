@@ -80,11 +80,13 @@ public class DecodeAuton extends LinearOpMode {
 
         //Ask Operator which starting position the Robot is in
         while (startingPosition==0){
-            if (gamepad1.a){startingPosition=1;}
-            if (gamepad1.b){startingPosition=2;}
-            if (gamepad1.y){startingPosition=3;}
+            if (gamepad1.dpad_up){startingPosition=1;}
+            if (gamepad1.dpad_right){startingPosition=2;}
+            if (gamepad1.dpad_down){startingPosition=3;}
             telemetry.addLine("Please Select Starting Position");
-            telemetry.addLine("Press A for 1, B for 2 or X for 3");
+            telemetry.addLine("Press DPad Up for 1");
+            telemetry.addLine("Press DPad Right for 2");
+            telemetry.addLine("Press DPad Down for 3");
             telemetry.update();
         }
 
