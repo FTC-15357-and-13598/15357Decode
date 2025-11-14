@@ -57,22 +57,20 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.teamcode.utility.*;
 
-@TeleOp(name="Just Field Centric Test", group="Linear OpMode")
+@TeleOp(name="Drive Motor Test", group="Linear OpMode")
 //@Disabled
 public class DriveMotorTest extends LinearOpMode {
 
     // Motor locations defined below. .
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor leftFrontDrive = null;
-    private DcMotor leftBackDrive = null;
-    private DcMotor rightFrontDrive = null;
-    private DcMotor rightBackDrive = null;
-    private DcMotorEx shooterMotor1 = null;
-    private DcMotor intakeMotor = null;
-
-    private Servo intakeServo = null;
+    private DcMotorEx leftFrontDrive = null;
+    private DcMotorEx leftBackDrive = null;
+    private DcMotorEx rightFrontDrive = null;
+    private DcMotorEx rightBackDrive = null;
     Orientation angles;
 
     private IMU imu = null;
@@ -86,13 +84,10 @@ public class DriveMotorTest extends LinearOpMode {
          * These names are critical, label the front of the robot as FRONT. This will be
          * important later!
          */
-        leftFrontDrive  = hardwareMap.get(DcMotor.class, "leftFrontDrive");
-        leftBackDrive  = hardwareMap.get(DcMotor.class, "leftBackDrive");
-        rightFrontDrive = hardwareMap.get(DcMotor.class, "rightFrontDrive");
-        rightBackDrive = hardwareMap.get(DcMotor.class, "rightBackDrive");
-        shooterMotor1 = hardwareMap.get(DcMotorEx.class, "shooterMotor1");
-        intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
-        intakeServo = hardwareMap.get(Servo.class, "intakeServo");
+        leftFrontDrive  = hardwareMap.get(DcMotorEx.class,Constants.Drivetrain.MOTOR_LF);
+        leftBackDrive  = hardwareMap.get(DcMotorEx.class,Constants.Drivetrain.MOTOR_LB);
+        rightFrontDrive = hardwareMap.get(DcMotorEx.class,Constants.Drivetrain.MOTOR_RF);
+        rightBackDrive = hardwareMap.get(DcMotorEx.class,Constants.Drivetrain.MOTOR_RB);
 
         /*
          * This initializes the servoTest servo. You would initialize other servos using the same method.
@@ -111,12 +106,32 @@ public class DriveMotorTest extends LinearOpMode {
         // when you first test your robot, push the left joystick forward and observe the direction the wheels turn.
         // Reverse the direction (flip FORWARD <-> REVERSE ) of any wheel that runs backward
         // Keep testing until ALL the wheels move the robot forward when you push the left joystick forward.
-        leftFrontDrive.setDirection(DcMotor.Direction.FORWARD);
-        leftBackDrive.setDirection(DcMotor.Direction.FORWARD);
-        rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
-        rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
-        shooterMotor1.setDirection(DcMotorEx.Direction.REVERSE);
-        intakeServo.setDirection(Servo.Direction.REVERSE);
+        leftFrontDrive.setDirection(Constants.Drivetrain.LF_Direction);
+        leftBackDrive.setDirection(Constants.Drivetrain.LB_Direction);
+        rightFrontDrive.setDirection(Constants.Drivetrain.RF_Direction);
+        rightBackDrive.setDirection(Constants.Drivetrain.RB_Direction);
+
+        boolean useEncoder = false;
+        if(useEncoder){
+            leftBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }else {
+            leftBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            leftBackDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            leftFrontDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            rightBackDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            rightFrontDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        }
 
         // Wait for the game to start (driver presses PLAY) This will display on the Driver Station.
         telemetry.addData("Status", "Initialized");
@@ -135,7 +150,6 @@ public class DriveMotorTest extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-         boolean isShooting=false;
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
@@ -146,7 +160,6 @@ public class DriveMotorTest extends LinearOpMode {
 
             double max;
 
-            telemetry.update();
             // This section uses packet.put to send telenmetry data to the dashboard
             packet.put("heading", botHeading);
             packet.put("frontLeftMotor Power", leftFrontDrive.getPower());
@@ -177,7 +190,7 @@ public class DriveMotorTest extends LinearOpMode {
 
 
             //This will reset the imu
-            if (gamepad1.back) {
+            if (gamepad1.start) {
                 imu.resetYaw();
             }
 
@@ -199,40 +212,25 @@ public class DriveMotorTest extends LinearOpMode {
             rightBackDrive.setPower(rightBackPower);
             //get encoder velocity
 
-
-           double shooterVelocity = shooterMotor1.getVelocity();
-            telemetry.addData("velocity", shooterVelocity);
-
             if (gamepad1.dpad_up){leftFrontDrive.setPower(1.0);}
             if (gamepad1.dpad_down){leftBackDrive.setPower(1.0);}
             if (gamepad1.dpad_left){rightFrontDrive.setPower(1.0);}
             if (gamepad1.dpad_right){rightBackDrive.setPower(1.0);}
 
-            if (gamepad1.y){
-                shooterMotor1.setPower(0.75);
-                if (shooterVelocity>1600){isShooting=true;
-                    intakeServo.setPosition(0);
 
-                }
-                else {intakeServo.setPosition(0.5);
-                    isShooting=false;}
-
-            }//was .7
-            else if (gamepad1.x){shooterMotor1.setPower(-0.3);}
-            else {shooterMotor1.setPower(0);}
-
-
-            if (gamepad1.b){intakeMotor.setPower(1.0);}
-            else {intakeMotor.setPower(0);}
-            if (gamepad1.a) {intakeServo.setPosition(0);}
-            else if (isShooting==false){intakeServo.setPosition(0.5);}
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
-            telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
-            telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontDrive.getPower(), rightFrontDrive.getPower());
-            //Read encoder velocity for back motors
-            telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackDrive.getPower(), rightBackDrive.getPower());
+            telemetry.addData("Power Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
+            telemetry.addData("Power Back left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
+            telemetry.addData("Velocity Front left/Right", "%4.2f, %4.2f", leftFrontDrive.getVelocity(), rightFrontDrive.getVelocity());
+            telemetry.addData("Velocity Back  left/Right", "%4.2f, %4.2f", leftBackDrive.getVelocity(), rightBackDrive.getVelocity());
+            telemetry.addData("Current Front left/Right", "%4.2f, %4.2f", leftFrontDrive.getCurrent(CurrentUnit.AMPS), rightFrontDrive.getCurrent(CurrentUnit.AMPS));
+            telemetry.addData("Current Back  left/Right", "%4.2f, %4.2f", leftBackDrive.getCurrent(CurrentUnit.AMPS), rightBackDrive.getCurrent(CurrentUnit.AMPS));
+            telemetry.addData("Left Front Position", leftFrontDrive.getCurrentPosition());
+            telemetry.addData("Right Front Position", rightFrontDrive.getCurrentPosition());
+            telemetry.addData("Left Back Position", leftBackDrive.getCurrentPosition());
+            telemetry.addData("Right Back Position", rightBackDrive.getCurrentPosition());
+
             telemetry.update();
         }
     }

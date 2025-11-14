@@ -104,7 +104,7 @@ public class intakeShooter {
     }
 
     public void servoReverse(){
-        shooterServo.setPosition(Constants.IntakeShooter.servoStop);
+        shooterServo.setPosition(Constants.IntakeShooter.servoReverse);
     }
 
     public void shoot(){

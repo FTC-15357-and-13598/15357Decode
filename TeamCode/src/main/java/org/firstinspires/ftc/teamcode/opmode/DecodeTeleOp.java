@@ -108,11 +108,6 @@ public class DecodeTeleOp extends LinearOpMode {
 
         waitForStart();
 
-
-        //specimenElevator.toDown();
-
-        waitForStart();
-
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
             /* Call periodic for subsystems that have a periodic voids,
@@ -125,7 +120,6 @@ public class DecodeTeleOp extends LinearOpMode {
 
             //Variables for the specimen subsystem.
             telemetry.addData("Bot heading", drivetrain.heading);
-            telemetry.addData("Bucket Servo", gamepad2.y);
 
             // Gamepad inputs
             // Run shooter servo on a
@@ -199,6 +193,8 @@ public class DecodeTeleOp extends LinearOpMode {
 
             //update dashboard and telemetry if used
             if (Constants.Telemetry.showTelemetry) {
+                    telemetry.addData("tagheading", vision.tagHeading());
+                    telemetry.addData("tagDistance", vision.tagDistance());
                 telemetry.update();
             }
             if (Constants.Telemetry.showDashBoard) {
