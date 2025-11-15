@@ -144,11 +144,10 @@ public class DecodeTeleOp extends LinearOpMode {
                 intksht.stopShooter();
             }
             // Shoot on y, stop when released
-            if (gamepad2.y){
+            if (gamepad2.right_trigger >0.1){
                 intksht.shoot();
-            } else if (gamepad2.yWasReleased()){
-                intksht.stopServo();
-                intksht.stopShooter();
+            } else if (gamepad2.right_trigger <0.1 && intksht.shooting){
+                intksht.stopShooting();
             }
 
 
@@ -166,7 +165,7 @@ public class DecodeTeleOp extends LinearOpMode {
             double speedfact = 0.4;
             //If trigger pulled set speed factor to higher value
             if (gamepad1.right_trigger > 0.1) {
-                speedfact = 0.8;
+                speedfact = 0.9;
             }
 
             //Determine X and Y values to send to drivetrain based on Alliance

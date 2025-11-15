@@ -56,7 +56,7 @@ public class intakeShooter {
 
     public int position, target;
     public double power;
-    public boolean AtTarget;
+    public boolean shooting;
     public String bucketPosition = null;
     public boolean shootAtSpd;
 
@@ -108,6 +108,7 @@ public class intakeShooter {
     }
 
     public void shoot(){
+        shooting=true;
         runShooter();
         if (shootAtSpd) {
             servoForward();
@@ -115,5 +116,11 @@ public class intakeShooter {
         else {
             stopServo();
         }
+    }
+
+    public void stopShooting () {
+        shooting = false;
+        stopServo();
+        stopShooter();
     }
 }
