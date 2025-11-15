@@ -90,6 +90,7 @@ public class DecodeTeleOp extends LinearOpMode {
         drivetrain.initialize();
         intksht.init();
         vision.init();
+        intksht.stopServo();
 
         // Get allaince from start info
         alliance= allianceData.allianceInstance().getAlliance();

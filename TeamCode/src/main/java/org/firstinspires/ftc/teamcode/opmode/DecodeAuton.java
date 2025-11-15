@@ -102,6 +102,7 @@ public class DecodeAuton extends LinearOpMode {
         drivetrain.initialize();
         intksht.init();
         vision.init();
+        intksht.stopServo();
 
         waitForStart();
 
