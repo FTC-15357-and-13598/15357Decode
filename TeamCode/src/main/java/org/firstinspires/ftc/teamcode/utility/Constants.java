@@ -30,7 +30,7 @@ public class Constants {
         public static final RevHubOrientationOnRobot.UsbFacingDirection HUB_USB = RevHubOrientationOnRobot.UsbFacingDirection.UP;
 
         // Position Tuning constants
-        // TODO Tune gains and accels for robot. Currnently moves in an odd rhomboid way.
+        // TODO Tune gains and accels for robot. Currently moves in an odd rhomboid way.
 
         public static final double X_GAIN          = 0.06;    // Strength of axial position control
         public static final double X_ACCEL         = 1000;  //previously 50   // Acceleration limit.  Percent Power change per second.  1.0 = 0-100% power in 1 sec.
@@ -58,12 +58,12 @@ public class Constants {
         public static final double linearScaler = 1.0;
         public static final double angularScaler = 1.0;
 
-        public static final SparkFunOTOS.Pose2D R1 = new SparkFunOTOS.Pose2D(40.5,9,180.0); // Starting position red 1
-        public static final SparkFunOTOS.Pose2D R2 = new SparkFunOTOS.Pose2D(61,9,180.0); // Starting position red 2
-        public static final SparkFunOTOS.Pose2D R3 = new SparkFunOTOS.Pose2D(81,9,180.0); // Starting position red 3
+        public static final SparkFunOTOS.Pose2D R1 = new SparkFunOTOS.Pose2D(41,8.5,180.0); // Starting position red 1
+        public static final SparkFunOTOS.Pose2D R2 = new SparkFunOTOS.Pose2D(81,8.5,180.0); // Starting position red 2
+        public static final SparkFunOTOS.Pose2D R3 = new SparkFunOTOS.Pose2D(122,121.5,135.0); // Starting position red 3
         public static final SparkFunOTOS.Pose2D B1 = new SparkFunOTOS.Pose2D(101,9,180.0); // Starting position blue 1
         public static final SparkFunOTOS.Pose2D B2 = new SparkFunOTOS.Pose2D(81,9,180.0); // Starting position blue 2
-        public static final SparkFunOTOS.Pose2D B3 = new SparkFunOTOS.Pose2D(36,39,180.0); // Starting position blue 3
+        public static final SparkFunOTOS.Pose2D B3 = new SparkFunOTOS.Pose2D(24,121,180.0); // Starting position blue 3
 
 
         public static final double alignGain =0.1; //Gain for Auto align

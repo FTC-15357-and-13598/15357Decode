@@ -136,7 +136,7 @@ public class DecodeAuton extends LinearOpMode {
             /* Call periodic for subsystems that have a periodic voids,
              do these first as some of the voids called by the commands and other sequences
              require data from the periodic functions. NOTE: Periodics will not be called
-             during divetrain.gotoPosition commands due to the fact they do not return unitl
+             during drivetrain.gotoPosition commands due to the fact they do not return until
              the robot is in position.
              */
             intksht.periodic();
@@ -150,8 +150,8 @@ public class DecodeAuton extends LinearOpMode {
         //Begin switch structure
         switch (step){
             case 1:     //first step of Auton for Red 1
-                drivetrain.gotoPosition(40.5,80,180,.3,0);
-                drivetrain.gotoPosition(40.5,110,110,.3,5);
+                drivetrain.gotoPosition(81,8.5,180,.3,0);
+                drivetrain.gotoPosition(90,82,140,.3,5);
                 step =200;   //step 200 to end Auton
                 // step =step+1 // uncomment this to move to next step
 
@@ -160,7 +160,9 @@ public class DecodeAuton extends LinearOpMode {
 
             case 41:    //first step of Auton for Red 3
                 // step =step+1 // uncomment this to move to next step
-
+                drivetrain.gotoPosition(122,121.5,135,.3,0);
+                drivetrain.gotoPosition(90,82,140,.3,5);
+                step =200;
             case 61:    //first step of Auton for Blue 1
                 // step =step+1 // uncomment this to move to next step
 
