@@ -62,6 +62,8 @@ public class intakeShooter {
     public void periodic(){
 
         shootAtSpd = (shooterMotor.getVelocity() >targetSpd);
+        myOpMode.telemetry.addData("At Speed", shootAtSpd);
+        myOpMode.telemetry.addData("Shooter Speed",shooterMotor.getVelocity());
     }
 
     public void runIntake (){
