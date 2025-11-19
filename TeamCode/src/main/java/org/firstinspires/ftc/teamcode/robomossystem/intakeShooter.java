@@ -54,15 +54,14 @@ public class intakeShooter {
      * class which sends items telemetry or the dashboard
     **/
 
-    public int position, target;
-    public double power;
+
     public boolean shooting;
-    public String bucketPosition = null;
     public boolean shootAtSpd;
+    public double targetSpd =1600;
 
     public void periodic(){
 
-        shootAtSpd = (shooterMotor.getVelocity() >1600.0);
+        shootAtSpd = (shooterMotor.getVelocity() >targetSpd);
     }
 
     public void runIntake (){
@@ -82,7 +81,14 @@ public class intakeShooter {
 
     public void runShooter(){
         shooterMotor.setPower(Constants.IntakeShooter.shootPower);
+        targetSpd = Constants.IntakeShooter.shootPower*Constants.IntakeShooter.thresholdFactor;
         myOpMode.telemetry.addData("Shooter Power",Constants.IntakeShooter.shootPower);
+    }
+
+    public void runShtrWPower(double power){
+        shooterMotor.setPower(power);
+        targetSpd = power*Constants.IntakeShooter.thresholdFactor;
+        myOpMode.telemetry.addData("Shooter Power",power);
     }
 
     public void revShooter(){
@@ -108,7 +114,7 @@ public class intakeShooter {
     }
 
     public void shoot(){
-        shooting=true;
+        shooting =true;
         runShooter();
         if (shootAtSpd) {
             servoForward();
@@ -118,7 +124,18 @@ public class intakeShooter {
         }
     }
 
-    public void stopShooting () {
+    public void shootWpower(double power){
+        shooting =true;
+        runShtrWPower(power);
+        if (shootAtSpd) {
+            servoForward();
+        }
+        else {
+            stopServo();
+        }
+    }
+
+    public void stopShooting(){
         shooting = false;
         stopServo();
         stopShooter();

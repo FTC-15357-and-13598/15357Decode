@@ -150,7 +150,7 @@ public class DecodeAuton extends LinearOpMode {
         //Begin switch structure
         switch (step){
             case 1:     //first step of Auton for Red 1
-                drivetrain.gotoPosition(81,8.5,180,.3,0);
+                drivetrain.gotoPosition(101,8.5,180,.3,0);
                 drivetrain.gotoPosition(90,82,140,.3,5);
                 step =200;   //step 200 to end Auton
                 // step =step+1 // uncomment this to move to next step
@@ -160,14 +160,49 @@ public class DecodeAuton extends LinearOpMode {
 
             case 41:    //first step of Auton for Red 3
                 // step =step+1 // uncomment this to move to next step
-                drivetrain.gotoPosition(122,121.5,135,.3,0);
+                drivetrain.gotoPosition(122,120.5,135,.3,0);
                 drivetrain.gotoPosition(90,82,140,.3,5);
                 step =200;
             case 61:    //first step of Auton for Blue 1
+                drivetrain.gotoPosition(41,60,180,.3,0);
+                drivetrain.gotoPosition(58,87,-135,.3,5);
+                step =200;
                 // step =step+1 // uncomment this to move to next step
 
             case 81:    //first step of Auton for Blue 2
-                // step =step+1 // uncomment this to move to next step
+                drivetrain.gotoPosition(57,14.5,-161,.3,1);
+                step =step+1; // uncomment this to move to next step
+
+            case 82:    //start shooter and wait for it to get to speed
+                intksht.shootWpower(.9); //start shooter
+                if (intksht.shootAtSpd) {
+                    step = step + 1; // uncomment this to move to next step
+                }
+
+            case 83:    //at speed will turn off when first ball shoots
+                if (!intksht.shootAtSpd) {
+                    step = step + 1; // uncomment this to move to next step
+                }
+
+            case 84:    //will get to speed before 2nd ball shoots
+                if (intksht.shootAtSpd) {
+                    step = step + 1; // uncomment this to move to next step
+                }
+
+            case 85:    //at speed will turn off when second ball shoots
+                if (!intksht.shootAtSpd) {
+                    step = step + 1; // uncomment this to move to next step
+                }
+
+            case 86:    //will get to speed before 3rd ball shoots
+                if (intksht.shootAtSpd) {
+                    step = step + 1; // uncomment this to move to next step
+                }
+
+            case 87:    //at speed will turn off when 3rd ball shoots
+                if (!intksht.shootAtSpd) {
+                    step = 200; // 3rd ball gone, we're done
+                }
 
             case 101:    //first step of Auton for Blue 3
                 // step =step+1 // uncomment this to move to next step
