@@ -135,6 +135,12 @@ public class DecodeTeleOp extends LinearOpMode {
             } else if (gamepad2.bWasReleased()) {
                 intksht.stopIntake();
             }
+            if (gamepad2.y) {
+                intksht.reverseIntake();
+            } else if (gamepad2.yWasReleased()) {
+                intksht.stopIntake();
+            }
+
             // Reverse servo and shooter on x, stop when released
             if (gamepad2.x) {
                 intksht.servoReverse();
