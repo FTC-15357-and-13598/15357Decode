@@ -32,13 +32,13 @@ public class Constants {
         // Position Tuning constants
         // TODO Tune gains and accels for robot. Currently moves in an odd rhomboid way.
 
-        public static final double X_GAIN          = 0.06;    // Strength of axial position control
+        public static final double X_GAIN          = 0.04;    // Strength of axial position control
         public static final double X_ACCEL         = 1000;  //previously 50   // Acceleration limit.  Percent Power change per second.  1.0 = 0-100% power in 1 sec.
         public static final double X_TOLERANCE     = 1.5;     // Controller is is "inPosition" if position error is < +/- this amount
         public static final double X_DEADBAND      = 0.2;     // Error less than this causes zero output.  Must be smaller than DRIVE_TOLERANCE
         public static final double X_MAX_AUTO      = 0.9;     // "default" Maximum Axial power limit during autonomous
 
-        public static final double Y_GAIN         = 0.06;    // Strength of lateral position control
+        public static final double Y_GAIN         = 0.04;    // Strength of lateral position control
         public static final double Y_ACCEL        = 1000;  //previously 50   // Acceleration limit.  Percent Power change per second.  1.0 = 0-100% power in 1 sec.
         public static final double Y_TOLERANCE    = 1.5;     // Controller is is "inPosition" if position error is < +/- this amount
         public static final double Y_DEADBAND     = 0.2;     // Error less than this causes zero output.  Must be smaller than DRIVE_TOLERANCE
