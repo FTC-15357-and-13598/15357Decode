@@ -152,13 +152,13 @@ public class DecodeTeleOp extends LinearOpMode {
             // Shoot on y, stop when released
             if (gamepad2.right_trigger >0.1){
                 intksht.shoot();
-            } else if (gamepad2.right_trigger <0.1 && intksht.shooting){
+            } else if (gamepad2.right_trigger <0.1 && gamepad2.left_trigger <0.1 && intksht.shooting){
                 intksht.stopShooting();
             }
 
             if (gamepad2.left_trigger >0.1){
-                intksht.shootWpower(0.71);
-            } else if (gamepad2.left_trigger <0.1 && intksht.shooting){
+                intksht.shootWpower(0.78);
+            } else if (gamepad2.left_trigger <0.1 && gamepad2.right_trigger <0.1 && intksht.shooting){
                 intksht.stopShooting();
             }
 
@@ -193,7 +193,7 @@ public class DecodeTeleOp extends LinearOpMode {
             // TODO Uncomment the below line to go back to robot FC, but then comment the moveRobot line
             //calculate alignment
             double alignTurn;//// = vision.tagHeading() * Constants.Drivetrain.alignGain;
-            if (gamepad1.a) {
+            if (gamepad1.a &&(Math.abs(vision.tagHeading())<100.0)) {
                 //calculate alignment
                 alignTurn = vision.tagHeading() * Constants.Drivetrain.alignGain;
                 drivetrain.moveRobotFC(xComponent, yComponent, alignTurn, speedfact);

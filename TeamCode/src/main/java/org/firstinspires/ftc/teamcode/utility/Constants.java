@@ -66,7 +66,7 @@ public class Constants {
         public static final SparkFunOTOS.Pose2D B3 = new SparkFunOTOS.Pose2D(24.5,126.0,-135); // Starting position blue 3
 
 
-        public static final double alignGain =0.1; //Gain for Auto align
+        public static final double alignGain = -0.05; //Gain for Auto align
 
     }
     public static final class IntakeShooter {
@@ -80,12 +80,13 @@ public class Constants {
         public static final String intakeServo = "intakeServo";
         public static final Servo.Direction intkServDirec = com.qualcomm.robotcore.hardware.Servo.Direction.FORWARD;
 
-        public static final double shootPower         =0.75;
+        public static final double shootPower         =0.72;
         public static final double shooterBackUpPower =-0.2;
         public static final double thresholdFactor =2200;  // This will be multiplied by the power to the shooter motor. The resulting
                                                                 // number will be compared to the speed, if the shooter speed is above the value
-                                                                // the servo will be allowed to advance a ball to the shooter.
 
+        public static final double autonFarShot = 0.8;                                                // the servo will be allowed to advance a ball to the shooter.
+        public static final double autonCloseShot = 0.65;
         public static final double intakePower          =1.0;
         public static final double intakeRevPower       =-0.2;
 
